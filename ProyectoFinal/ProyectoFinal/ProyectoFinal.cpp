@@ -148,7 +148,7 @@ int main( )
     // Load textures
     //Model pokeArriba((char*)"Models/Pokeball/pokearriba.obj");
     //Model pokeAbajo((char*)"Models/Pokeball/pokeabajo.obj");
-    Model objetoProyecto((char*)"Models/ModelosProyecto/lata/lata.obj");
+    Model objetoProyecto((char*)"Models/ModelosProyecto/libro/libro.obj");
 
 
     GLuint texture;
