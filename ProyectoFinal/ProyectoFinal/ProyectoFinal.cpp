@@ -148,7 +148,8 @@ int main( )
     // Load textures
     //Model pokeArriba((char*)"Models/Pokeball/pokearriba.obj");
     //Model pokeAbajo((char*)"Models/Pokeball/pokeabajo.obj");
-    Model objetoProyecto((char*)"Models/ModelosProyecto/casa/Casa-gravity-falls.obj");
+    Model casa((char*)"Models/ModelosProyecto/casa/Casa-gravity-falls.obj");
+    Model cama1((char*)"Models/ModelosProyecto/cama/cama.obj");
 
 
     GLuint texture;
@@ -211,7 +212,24 @@ int main( )
         model = glm:: mat4(1);
         model = glm::rotate(model, glm::radians(-rot), glm::vec3(1.0f, 0.0f, 0.0f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        objetoProyecto.Draw(shader);
+        casa.Draw(shader);
+
+
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(-0.963f, 3.254f, 1.488f));
+        model = glm::scale(model, glm::vec3(0.445f, 0.445f, 0.445f));
+        model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        cama1.Draw(shader);
+
+
+
+
+
+
+
+
+
 
         glBindVertexArray(0);
 
