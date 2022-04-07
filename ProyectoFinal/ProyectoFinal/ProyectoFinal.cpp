@@ -150,7 +150,13 @@ int main( )
     //Model pokeAbajo((char*)"Models/Pokeball/pokeabajo.obj");
     Model casa((char*)"Models/ModelosProyecto/casa/Casa-gravity-falls.obj");
     Model cama1((char*)"Models/ModelosProyecto/cama/cama.obj");
-
+    Model cama2((char*)"Models/ModelosProyecto/cama/cama2.obj");
+    Model mesa((char*)"Models/ModelosProyecto/mesa/mesa.obj");
+    Model buro((char*)"Models/ModelosProyecto/Buro/buro.obj");
+    Model lata((char*)"Models/ModelosProyecto/lata/lata.obj");
+    Model libro((char*)"Models/ModelosProyecto/libro/libro.obj");
+    Model maleta((char*)"Models/ModelosProyecto/maleta/maleta.obj");
+    Model bill((char*)"Models/ModelosProyecto/Bill/bill.obj");
 
     GLuint texture;
     glGenTextures(1, &texture);
@@ -222,14 +228,54 @@ int main( )
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         cama1.Draw(shader);
 
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(-2.238f, 3.355f, -1.5f));
+        model = glm::scale(model, glm::vec3(0.417f, 0.417f, 0.417f));
+        model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        cama2.Draw(shader);
 
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(-3.8f, 3.85f, 0.45f));
+        model = glm::scale(model, glm::vec3(0.353f, 0.370f, 0.370f));
+        model = glm::rotate(model, glm::radians(-82.917f), glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        mesa.Draw(shader);
 
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(-3.8f, 3.25f, -0.812f));
+        model = glm::scale(model, glm::vec3(0.503f, 0.503f, 0.503f));
+        model = glm::rotate(model, glm::radians(-31.169f), glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        buro.Draw(shader);
 
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(0.806f, 3.355f, 1.249f));
+        model = glm::scale(model, glm::vec3(0.355f, 0.355f, 0.355f));
+        model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        lata.Draw(shader);
 
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(-1.4f, 3.361f, -0.537f));
+        model = glm::scale(model, glm::vec3(0.164f, 0.164f, 0.164f));
+        //model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        libro.Draw(shader);
 
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(-2.001f, 3.399f, 0.355f));
+        model = glm::scale(model, glm::vec3(0.343f, 0.343f, 0.343f));
+        model = glm::rotate(model, glm::radians(-195.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        maleta.Draw(shader);
 
-
-
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(-2.0f, 3.318f, 0.0f));
+        //model = glm::scale(model, glm::vec3(1.0f, 0.343f, 0.343f));
+        model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        bill.Draw(shader);
 
         glBindVertexArray(0);
 
