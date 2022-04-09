@@ -44,6 +44,9 @@ GLfloat lastFrame = 0.0f;
 float rot = 0.0f;
 bool esta_abajo = true;
 bool rotar = false;
+bool active1 = false;
+float animacion1RotY = -79.0f;
+bool sentido1 = true;
 
 int main( )
 {
@@ -101,8 +104,8 @@ int main( )
 
 
     // Load models
-    Model Pizza((char*)"Models/Pizza/PizzaSteve.obj");
-    Model brader((char*)"Models/Pizza/brader.obj");
+    //Model Pizza((char*)"Models/Pizza/PizzaSteve.obj");
+    //Model brader((char*)"Models/Pizza/brader.obj");
     glm::mat4 projection = glm::perspective( camera.GetZoom( ), ( float )SCREEN_WIDTH/( float )SCREEN_HEIGHT, 0.1f, 100.0f );
     
     GLfloat vertices[] =
@@ -157,6 +160,7 @@ int main( )
     Model libro((char*)"Models/ModelosProyecto/libro/libro.obj");
     Model maleta((char*)"Models/ModelosProyecto/maleta/maleta.obj");
     Model bill((char*)"Models/ModelosProyecto/Bill/bill.obj");
+    Model ventana((char*)"Models/ModelosProyecto/ventana/ventana.obj");
 
     GLuint texture;
     glGenTextures(1, &texture);
@@ -172,19 +176,19 @@ int main( )
 
 
     //Cambiar lo de alfa para PNG----------------------------------------------------------------------------------
-    image = stbi_load("images/goku.jpg", &textureWidth, &textureHeight, &nrChannels, 0);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, textureWidth, textureHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-    glGenerateMipmap(GL_TEXTURE_2D);
-    if (image)
-    {
-        //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, textureWidth, textureHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-        //glGenerateMipmap(GL_TEXTURE_2D);
-    }
-    else
-    {
-        std::cout << "Failed to load texture" << std::endl;
-    }
-    stbi_image_free(image);
+    //image = stbi_load("images/goku.jpg", &textureWidth, &textureHeight, &nrChannels, 0);
+    //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, textureWidth, textureHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+    //glGenerateMipmap(GL_TEXTURE_2D);
+    //if (image)
+    //{
+    //    //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, textureWidth, textureHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+    //    //glGenerateMipmap(GL_TEXTURE_2D);
+    //}
+    //else
+    //{
+    //    std::cout << "Failed to load texture" << std::endl;
+    //}
+    //stbi_image_free(image);
 
 
     // Game loop
@@ -257,7 +261,7 @@ int main( )
         lata.Draw(shader);
 
         model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(-1.4f, 3.361f, -0.537f));
+        model = glm::translate(model, glm::vec3(-0.4, 3.361f, -0.537f));
         model = glm::scale(model, glm::vec3(0.164f, 0.164f, 0.164f));
         //model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
@@ -276,6 +280,37 @@ int main( )
         model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         bill.Draw(shader);
+
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(-4.7f, 6.0f, -0.05f));
+        //model = glm::scale(model, glm::vec3(1.0f, 0.343f, 0.343f));
+        model = glm::rotate(model, glm::radians(animacion1RotY), glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        ventana.Draw(shader);
+
+        if (active1)
+        {
+            if (animacion1RotY >= -20.0) {
+                sentido1 = false;
+            }
+            else if (animacion1RotY < -80.0) {
+                sentido1 = true;
+            }
+            if (sentido1) {
+                animacion1RotY += 0.5f;
+            }
+            else {
+                animacion1RotY -= 0.5f;
+            }
+
+
+        }
+        else
+        {
+            sentido1 = true;
+            animacion1RotY = 0.0f;
+        }
+
 
         glBindVertexArray(0);
 
@@ -327,10 +362,6 @@ void DoMovement( )
         camera.ProcessKeyboard( RIGHT, deltaTime );
     }
 
-    if (keys[GLFW_KEY_O])
-    {
-        rotar = true;
-    }
 
 }
 
@@ -352,8 +383,13 @@ void KeyCallback( GLFWwindow *window, int key, int scancode, int action, int mod
         {
             keys[key] = false;
         }
-    }
 
+    }
+ 
+    if (keys[GLFW_KEY_O])
+    {
+        active1 = !active1;
+    }
  
 
  
