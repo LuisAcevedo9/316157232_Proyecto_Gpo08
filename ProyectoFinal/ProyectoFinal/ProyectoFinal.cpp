@@ -48,6 +48,11 @@ bool active1 = false;
 float animacion1RotY = -79.0f;
 bool sentido1 = true;
 
+//Segunda animación
+bool active2 = false;
+bool sentido2 = true;
+float animacion2posY = 3.6f;
+
 int main( )
 {
     // Init GLFW
@@ -275,7 +280,7 @@ int main( )
         maleta.Draw(shader);
 
         model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(-2.0f, 3.318f, 0.0f));
+        model = glm::translate(model, glm::vec3(-2.0f, animacion2posY, 0.0f));
         //model = glm::scale(model, glm::vec3(1.0f, 0.343f, 0.343f));
         model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
@@ -288,6 +293,7 @@ int main( )
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         ventana.Draw(shader);
 
+        //Animación 1
         if (active1)
         {
             if (animacion1RotY >= -20.0) {
@@ -310,7 +316,29 @@ int main( )
             sentido1 = true;
             animacion1RotY = 0.0f;
         }
+        //Animación 2
+        if (active2)
+        {
+            if (animacion2posY >= 3.9) {
+                sentido2 = false;
+            }
+            else if (animacion2posY < 3.3) {
+                sentido2 = true;
+            }
+            if (sentido2) {
+                animacion2posY += 0.005f;
+            }
+            else {
+                animacion2posY -= 0.005f;
+            }
 
+
+        }
+        else
+        {
+            sentido1 = true;
+            animacion2posY = 3.6f;
+        }
 
         glBindVertexArray(0);
 
@@ -366,34 +394,38 @@ void DoMovement( )
 }
 
 // Is called whenever a key is pressed/released via GLFW
-void KeyCallback( GLFWwindow *window, int key, int scancode, int action, int mode )
+void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
-    if ( GLFW_KEY_ESCAPE == key && GLFW_PRESS == action )
+    if (GLFW_KEY_ESCAPE == key && GLFW_PRESS == action)
     {
         glfwSetWindowShouldClose(window, GL_TRUE);
     }
-    
-    if ( key >= 0 && key < 1024 )
+
+    if (key >= 0 && key < 1024)
     {
-        if ( action == GLFW_PRESS )
+        if (action == GLFW_PRESS)
         {
             keys[key] = true;
         }
-        else if ( action == GLFW_RELEASE )
+        else if (action == GLFW_RELEASE)
         {
             keys[key] = false;
         }
 
     }
- 
+
     if (keys[GLFW_KEY_O])
     {
         active1 = !active1;
     }
- 
+    if (keys[GLFW_KEY_P])
+    {
+        active2 = !active2;
+    }
+}
 
  
-}
+
 
 void MouseCallback( GLFWwindow *window, double xPos, double yPos )
 {
