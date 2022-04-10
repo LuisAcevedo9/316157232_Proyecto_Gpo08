@@ -53,6 +53,15 @@ bool active2 = false;
 bool sentido2 = true;
 float animacion2posY = 3.6f;
 
+//Tercera animación
+bool active3 = false;
+bool sentido3bill = true;
+float animacion3scale = 1.0f;
+float animacion3posY = 0.0f;
+float animacion3rot1X = 0.0f;
+float animacion3rot2Y = 0.0f;
+float animacion3rot3Z = 0.0f;
+
 int main( )
 {
     // Init GLFW
@@ -259,36 +268,37 @@ int main( )
         buro.Draw(shader);
 
         model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(0.806f, 3.355f, 1.249f));
+        model = glm::translate(model, glm::vec3(0.806f, 3.355f + animacion3posY, 1.249f));
         model = glm::scale(model, glm::vec3(0.355f, 0.355f, 0.355f));
         model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+        model = glm::rotate(model, glm::radians(animacion3rot1X), glm::vec3(1.0f, 0.0f, 0.0f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         lata.Draw(shader);
 
         model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(-0.4, 3.361f, -0.537f));
+        model = glm::translate(model, glm::vec3(0.2, 3.361f + animacion3posY, -0.537f));
         model = glm::scale(model, glm::vec3(0.164f, 0.164f, 0.164f));
-        //model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+        model = glm::rotate(model, glm::radians(animacion3rot2Y), glm::vec3(0.0f, 1.0f, 0.0f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         libro.Draw(shader);
 
         model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(-2.001f, 3.399f, 0.355f));
+        model = glm::translate(model, glm::vec3(-2.5f, 3.399f + animacion3posY, 0.355f));
         model = glm::scale(model, glm::vec3(0.343f, 0.343f, 0.343f));
         model = glm::rotate(model, glm::radians(-195.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::rotate(model, glm::radians(animacion3rot3Z), glm::vec3(0.0f, 0.0f, 1.0f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         maleta.Draw(shader);
 
         model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(-2.0f, animacion2posY, 0.0f));
-        //model = glm::scale(model, glm::vec3(1.0f, 0.343f, 0.343f));
+        model = glm::translate(model, glm::vec3(-1.1f, animacion2posY, 0.0f));
+        model = glm::scale(model, glm::vec3(animacion3scale, animacion3scale, animacion3scale));
         model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         bill.Draw(shader);
 
         model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(-4.7f, 6.0f, -0.05f));
-        //model = glm::scale(model, glm::vec3(1.0f, 0.343f, 0.343f));
         model = glm::rotate(model, glm::radians(animacion1RotY), glm::vec3(0.0f, 1.0f, 0.0f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         ventana.Draw(shader);
@@ -296,7 +306,7 @@ int main( )
         //Animación 1
         if (active1)
         {
-            if (animacion1RotY >= -20.0) {
+            if (animacion1RotY > -20.0) {
                 sentido1 = false;
             }
             else if (animacion1RotY < -80.0) {
@@ -336,9 +346,49 @@ int main( )
         }
         else
         {
-            sentido1 = true;
+            sentido2 = true;
             animacion2posY = 3.6f;
         }
+
+
+        //Animacion 3
+        if (active3)
+        {
+            //Animación de bill
+            if (animacion3scale >= 1.3) {
+                sentido3bill = false;
+            }
+            else if (animacion3scale < 0.8){
+                sentido3bill = true;
+                }
+                if (sentido3bill) {
+                    animacion3scale += 0.006f;
+                }
+                else {
+                    animacion3scale -= 0.006f;
+                }
+
+            //Animación de objetos
+            if (animacion3posY >= 2.0) {
+                animacion3posY = 2.0f;
+                //Rotación de los objetos
+                animacion3rot1X += 0.5f;
+                animacion3rot2Y += 0.5f;
+                animacion3rot3Z += 0.5f;
+
+            }
+            else {
+                animacion3posY += 0.003;
+            }
+
+        }
+        else
+        {
+            sentido3bill = true;
+            animacion3scale = 1.0f;
+        }
+
+
 
         glBindVertexArray(0);
 
@@ -421,6 +471,10 @@ void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode
     if (keys[GLFW_KEY_P])
     {
         active2 = !active2;
+    }
+    if (keys[GLFW_KEY_L])
+    {
+        active3 = !active3;
     }
 }
 
