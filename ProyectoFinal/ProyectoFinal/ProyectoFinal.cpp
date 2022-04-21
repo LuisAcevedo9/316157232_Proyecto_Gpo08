@@ -176,6 +176,13 @@ int main( )
     Model bill((char*)"Models/ModelosProyecto/Bill/bill.obj");
     Model ventana((char*)"Models/ModelosProyecto/ventana/ventana.obj");
 
+    //Modelos para el proyecto de teoría
+    Model mostrador((char*)"Models/ModelosProyecto/mostrador/mostrador.obj");
+    Model barril((char*)"Models/ModelosProyecto/barril/barril.obj");
+    Model canasta((char*)"Models/ModelosProyecto/canasta/canasta.obj");
+    Model letrero((char*)"Models/ModelosProyecto/letrero/letrero.obj");
+    Model caja((char*)"Models/ModelosProyecto/caja_roja/caja_roja.obj");
+
     GLuint texture;
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
@@ -302,6 +309,42 @@ int main( )
         model = glm::rotate(model, glm::radians(animacion1RotY), glm::vec3(0.0f, 1.0f, 0.0f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         ventana.Draw(shader);
+
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(7.086f, 1.508f, 1.061f));
+        model = glm::scale(model, glm::vec3(0.617f, 0.617f, 0.617f));
+        model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        mostrador.Draw(shader);
+
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(5.553f, 1.432f, 1.033f));
+        model = glm::scale(model, glm::vec3(0.246f, 0.246f, 0.246f));
+        //model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        barril.Draw(shader);
+
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(9.241f, 1.44f, 1.087f));
+        model = glm::scale(model, glm::vec3(0.308f, 0.308f, 0.308f));
+        //model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        canasta.Draw(shader);
+
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(6.87f, 2.58f, 0.816f));
+        model = glm::scale(model, glm::vec3(0.308f, 0.24f, 0.308f));
+        model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        letrero.Draw(shader);
+
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(8.117f, 1.285f, 0.89f));
+        model = glm::scale(model, glm::vec3(0.202f, 0.202f, 0.202f));
+        //model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        caja.Draw(shader);
+
 
         //Animación 1
         if (active1)
