@@ -31,6 +31,7 @@ int SCREEN_WIDTH, SCREEN_HEIGHT;
 void KeyCallback( GLFWwindow *window, int key, int scancode, int action, int mode );
 void MouseCallback( GLFWwindow *window, double xPos, double yPos );
 void DoMovement( );
+void animacion();
 
 
 // Camera
@@ -61,6 +62,19 @@ float animacion3posY = 0.0f;
 float animacion3rot1X = 0.0f;
 float animacion3rot2Y = 0.0f;
 float animacion3rot3Z = 0.0f;
+
+//Cuarta Animación
+glm::vec3 PosIni(-16.0f, 0.65f, -16.0f);
+float movKitX = 0.0;
+float movKitZ = 0.0;
+float rotKit = 0.0f;
+
+bool circuito = false;
+bool recorrido1 = true;
+bool recorrido2 = false;
+bool recorrido3 = false;
+bool recorrido4 = false;
+bool recorrido5 = false;
 
 int main( )
 {
@@ -175,6 +189,9 @@ int main( )
     Model maleta((char*)"Models/ModelosProyecto/maleta/maleta.obj");
     Model bill((char*)"Models/ModelosProyecto/Bill/bill.obj");
     Model ventana((char*)"Models/ModelosProyecto/ventana/ventana.obj");
+    Model piso((char*)"Models/ModelosProyecto/piso/piso_pasto.obj");
+    Model pato((char*)"Models/ModelosProyecto/pato/pato.obj");
+
 
     //Modelos para el proyecto de teoría
     Model mostrador((char*)"Models/ModelosProyecto/mostrador/mostrador.obj");
@@ -346,6 +363,22 @@ int main( )
         caja.Draw(shader);
 
 
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+        model = glm::scale(model, glm::vec3(3.0f, 1.0f, 3.0f));
+        //model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        piso.Draw(shader);
+
+
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, PosIni + glm::vec3(movKitX, 0, movKitZ));
+        model = glm::scale(model, glm::vec3(1.5f, 1.5f, 1.5f));
+        model = glm::rotate(model, glm::radians(rotKit), glm::vec3(0.0f, 1.0f, 0.0));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        pato.Draw(shader);
+
+        
         //Animación 1
         if (active1)
         {
@@ -431,7 +464,7 @@ int main( )
             animacion3scale = 1.0f;
         }
 
-
+        animacion();
 
         glBindVertexArray(0);
 
@@ -484,6 +517,81 @@ void DoMovement( )
     }
 
 
+    if (keys[GLFW_KEY_M])
+    {
+        circuito = true;
+    }
+
+    if (keys[GLFW_KEY_N])
+    {
+        circuito = false;
+    }
+
+
+
+}
+
+void animacion()
+{
+
+    //Movimiento del coche
+    if (circuito)
+    {
+        if (recorrido1)
+        {
+            movKitZ+= 0.05f;
+            if (movKitZ > 32)
+            {
+                recorrido1 = false;
+                recorrido2 = true;
+            }
+        }
+        if (recorrido2)
+        {
+            rotKit = 90;
+            movKitX += 0.05f;
+            if (movKitX > 32)
+            {
+                recorrido2 = false;
+                recorrido3 = true;
+
+            }
+        }
+
+        if (recorrido3)
+        {
+            rotKit = 180;
+            movKitZ -= 0.05f;
+            if (movKitZ < 0)
+            {
+                recorrido3 = false;
+                recorrido4 = true;
+            }
+        }
+
+        if (recorrido4)
+        {
+            rotKit = 270;
+            movKitX -= 0.05f;
+            if (movKitX < 0)
+            {
+                recorrido4 = false;
+                recorrido5 = true;
+            }
+        }
+        if (recorrido5)
+        {
+            rotKit = 0;
+            movKitZ += 0.1f;
+            if (movKitZ > 0)
+            {
+                recorrido5 = false;
+                recorrido1 = true;
+            }
+        }
+
+
+    }
 }
 
 // Is called whenever a key is pressed/released via GLFW
