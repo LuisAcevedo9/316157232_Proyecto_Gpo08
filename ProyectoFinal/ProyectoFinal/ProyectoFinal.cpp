@@ -1,5 +1,6 @@
 // Std. Includes
 #include <string>
+#include <math.h>
 
 // GLEW
 #include <GL/glew.h>
@@ -32,6 +33,7 @@ void KeyCallback( GLFWwindow *window, int key, int scancode, int action, int mod
 void MouseCallback( GLFWwindow *window, double xPos, double yPos );
 void DoMovement( );
 void animacion();
+void animacion2();
 
 
 // Camera
@@ -75,6 +77,19 @@ bool recorrido2 = false;
 bool recorrido3 = false;
 bool recorrido4 = false;
 bool recorrido5 = false;
+
+//Quinta animación
+bool circuito2 = false;
+bool recorrido1_2 = true;
+bool recorrido2_2 = false;
+bool recorrido3_2 = false;
+
+
+glm::vec3 PosIniLata(-1.1f, 3.6f, 0.0f);
+float posX = 0.0f;
+float posY = 0.0f;
+float RotBill = 0.0f;
+
 
 int main( )
 {
@@ -191,7 +206,8 @@ int main( )
     Model ventana((char*)"Models/ModelosProyecto/ventana/ventana.obj");
     Model piso((char*)"Models/ModelosProyecto/piso/piso_pasto.obj");
     Model pato((char*)"Models/ModelosProyecto/pato/pato.obj");
-
+    /*Model bill2((char*)"Models/ModelosProyecto/Bill/bill.obj");*/
+    Model lata2((char*)"Models/ModelosProyecto/lata/lata.obj");
 
     //Modelos para el proyecto de teoría
     Model mostrador((char*)"Models/ModelosProyecto/mostrador/mostrador.obj");
@@ -317,7 +333,7 @@ int main( )
         model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(-1.1f, animacion2posY, 0.0f));
         model = glm::scale(model, glm::vec3(animacion3scale, animacion3scale, animacion3scale));
-        model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::rotate(model, glm::radians(90.0f+ RotBill), glm::vec3(0.0f, 1.0f, 0.0f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         bill.Draw(shader);
 
@@ -378,6 +394,23 @@ int main( )
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         pato.Draw(shader);
 
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(0.806f + posX, 3.355f + posY, -1.3f));
+        model = glm::scale(model, glm::vec3(0.355f, 0.355f, 0.355f));
+        model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+       /* model = glm::rotate(model, glm::radians(animacion3rot1X), glm::vec3(1.0f, 0.0f, 0.0f));*/
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        lata2.Draw(shader);
+
+        //if (circuito2) {
+        //    model = glm::mat4(1.0f);
+        //    model = glm::translate(model, PosIni2 + glm::vec3(movKitX2, movKitY2, movKitZ2));
+        //    model = glm::scale(model, glm::vec3(0.8f, 0.8f, 0.8f));
+        //    model = glm::rotate(model, glm::radians(rotKit2), glm::vec3(0.0f, 1.0f, 0.0f));
+        //    glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        //    bill2.Draw(shader);
+        //}
+        
         
         //Animación 1
         if (active1)
@@ -465,6 +498,7 @@ int main( )
         }
 
         animacion();
+        animacion2();
 
         glBindVertexArray(0);
 
@@ -525,6 +559,12 @@ void DoMovement( )
     if (keys[GLFW_KEY_N])
     {
         circuito = false;
+    }
+
+
+    if (keys[GLFW_KEY_B])
+    {
+        circuito2 = true;
     }
 
 
@@ -590,6 +630,43 @@ void animacion()
             }
         }
 
+
+    }
+}
+
+void animacion2()
+{
+    //glm::vec3 PosIni2(-1.1f, 3.6f, 0.0f);
+    //Movimiento del coche
+    if (circuito2)
+    {
+        if (recorrido1_2)
+        {
+            RotBill += 0.5f;
+            if (RotBill > 30.0)
+            {
+                recorrido1_2 = false;
+                recorrido2_2 = true;
+            }
+        }
+        if (recorrido2_2)
+        {
+            RotBill -= 0.5f;
+
+            float v = 8.0f;
+            float rad = 40 / 57.3;
+            posX += 0.05f;
+            posY = tan(rad) * posX - (9.8 / (2 * v * v * cos(rad) * cos(rad))) * posX * posX;
+            if (RotBill < -30.0 && posY <=0.05)
+            {
+                recorrido2_2 = false;
+                recorrido3_2 = true;
+            }
+        }
+        if (recorrido3_2) {
+            RotBill = 0.0f;
+            circuito2 = false;
+        }
 
     }
 }

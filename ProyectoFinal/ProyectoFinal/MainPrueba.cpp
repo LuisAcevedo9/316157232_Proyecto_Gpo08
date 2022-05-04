@@ -1,5 +1,5 @@
 #include <iostream>
-#include <cmath>
+
 
 // GLEW
 #include <GL/glew.h>
@@ -31,6 +31,7 @@ void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode
 void MouseCallback(GLFWwindow *window, double xPos, double yPos);
 void DoMovement();
 void animacion();
+void animacion2();
 
 // Window dimensions
 const GLuint WIDTH = 800, HEIGHT = 600;
@@ -416,6 +417,7 @@ int main()
 		glfwPollEvents();
 		DoMovement();
 		animacion();
+		animacion2();
 
 
 		// Clear the colorbuffer
