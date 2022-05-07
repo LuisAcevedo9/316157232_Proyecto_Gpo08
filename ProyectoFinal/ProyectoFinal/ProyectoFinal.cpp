@@ -77,6 +77,10 @@ bool recorrido2 = false;
 bool recorrido3 = false;
 bool recorrido4 = false;
 bool recorrido5 = false;
+bool recorrido6 = false;
+bool recorrido7 = false;
+bool recorrido8 = false;
+bool recorrido9 = false;
 
 //Quinta animación
 bool circuito2 = false;
@@ -613,7 +617,7 @@ void animacion()
         {
             rotKit = 270;
             movKitX -= 0.05f;
-            if (movKitX < 0)
+            if (movKitX < 30)
             {
                 recorrido4 = false;
                 recorrido5 = true;
@@ -622,10 +626,50 @@ void animacion()
         if (recorrido5)
         {
             rotKit = 0;
+            movKitZ+= 0.05f;
+            if (movKitZ > 28)
+            {
+                recorrido5 = false;
+                recorrido6 = true;
+            }
+        }
+        if (recorrido6)
+        {
+            rotKit = 270;
+            movKitX -= 0.05f;
+            if (movKitX < 5)
+            {
+                recorrido6 = false;
+                recorrido7 = true;
+            }
+        }
+        if (recorrido7)
+        {
+            rotKit = 180;
+            movKitZ -= 0.05f;
+            if (movKitZ < 0)
+            {
+                recorrido7 = false;
+                recorrido8 = true;
+            }
+        }
+        if (recorrido8)
+        {
+            rotKit = 270;
+            movKitX -= 0.05f;
+            if (movKitX < 0)
+            {
+                recorrido8 = false;
+                recorrido9 = true;
+            }
+        }
+        if (recorrido9)
+        {
+            rotKit = 0;
             movKitZ += 0.1f;
             if (movKitZ > 0)
             {
-                recorrido5 = false;
+                recorrido9 = false;
                 recorrido1 = true;
             }
         }
