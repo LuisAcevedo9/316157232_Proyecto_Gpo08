@@ -1,0 +1,26 @@
+﻿  ProyectoFinal.cpp
+C:\Users\guich\Documents\Uni Semestre 2022-2\Lab CG\Repositorio\316157232_Proyecto_Gpo08\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(256,30): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\guich\Documents\Uni Semestre 2022-2\Lab CG\Repositorio\316157232_Proyecto_Gpo08\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(494,40): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\Users\guich\Documents\Uni Semestre 2022-2\Lab CG\Repositorio\316157232_Proyecto_Gpo08\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(226,38): warning C4101: 'nrChannels': variable local sin referencia
+C:\Users\guich\Documents\Uni Semestre 2022-2\Lab CG\Repositorio\316157232_Proyecto_Gpo08\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(226,9): warning C4101: 'textureWidth': variable local sin referencia
+C:\Users\guich\Documents\Uni Semestre 2022-2\Lab CG\Repositorio\316157232_Proyecto_Gpo08\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(228,20): warning C4101: 'image': variable local sin referencia
+C:\Users\guich\Documents\Uni Semestre 2022-2\Lab CG\Repositorio\316157232_Proyecto_Gpo08\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(226,23): warning C4101: 'textureHeight': variable local sin referencia
+C:\Users\guich\Documents\Uni Semestre 2022-2\Lab CG\Repositorio\316157232_Proyecto_Gpo08\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(701,34): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+C:\Users\guich\Documents\Uni Semestre 2022-2\Lab CG\Repositorio\316157232_Proyecto_Gpo08\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(703,36): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\guich\Documents\Uni Semestre 2022-2\Lab CG\Repositorio\316157232_Proyecto_Gpo08\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(760,17): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\guich\Documents\Uni Semestre 2022-2\Lab CG\Repositorio\316157232_Proyecto_Gpo08\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(761,17): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\guich\Documents\Uni Semestre 2022-2\Lab CG\Repositorio\316157232_Proyecto_Gpo08\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(765,21): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\guich\Documents\Uni Semestre 2022-2\Lab CG\Repositorio\316157232_Proyecto_Gpo08\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(766,21): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\guich\Documents\Uni Semestre 2022-2\Lab CG\Repositorio\316157232_Proyecto_Gpo08\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(768,13): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\guich\Documents\Uni Semestre 2022-2\Lab CG\Repositorio\316157232_Proyecto_Gpo08\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(769,13): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+soil2-debug.lib(SOIL2.obj) : warning LNK4075: se omite '/EDITANDCONTINUE' debido a la especificación '/OPT:ICF'
+LINK : warning LNK4098: la biblioteca predeterminada'MSVCRTD' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
+  Generando código
+  Previous IPDB not found, fall back to full compilation.
+  All 624 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Generación de código finalizada
+soil2-debug.lib(etc1_utils.obj) : warning LNK4099: no se encontró PDB 'soil2-debug.pdb' con 'soil2-debug.lib(etc1_utils.obj)' o en 'C:\Users\guich\Documents\Uni Semestre 2022-2\Lab CG\Repositorio\316157232_Proyecto_Gpo08\ProyectoFinal\Release\soil2-debug.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+soil2-debug.lib(image_DXT.obj) : warning LNK4099: no se encontró PDB 'soil2-debug.pdb' con 'soil2-debug.lib(image_DXT.obj)' o en 'C:\Users\guich\Documents\Uni Semestre 2022-2\Lab CG\Repositorio\316157232_Proyecto_Gpo08\ProyectoFinal\Release\soil2-debug.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+soil2-debug.lib(image_helper.obj) : warning LNK4099: no se encontró PDB 'soil2-debug.pdb' con 'soil2-debug.lib(image_helper.obj)' o en 'C:\Users\guich\Documents\Uni Semestre 2022-2\Lab CG\Repositorio\316157232_Proyecto_Gpo08\ProyectoFinal\Release\soil2-debug.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+soil2-debug.lib(SOIL2.obj) : warning LNK4099: no se encontró PDB 'soil2-debug.pdb' con 'soil2-debug.lib(SOIL2.obj)' o en 'C:\Users\guich\Documents\Uni Semestre 2022-2\Lab CG\Repositorio\316157232_Proyecto_Gpo08\ProyectoFinal\Release\soil2-debug.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+  ProyectoFinal.vcxproj -> C:\Users\guich\Documents\Uni Semestre 2022-2\Lab CG\Repositorio\316157232_Proyecto_Gpo08\ProyectoFinal\Release\ProyectoFinal.exe
